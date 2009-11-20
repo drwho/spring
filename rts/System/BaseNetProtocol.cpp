@@ -38,7 +38,7 @@ PacketType CBaseNetProtocol::SendQuit(const std::string& reason)
 {
 	unsigned size = 3 + reason.size() + 1;
 	PackPacket* packet = new PackPacket(size, NETMSG_QUIT);
-	*packet << static_cast<uint16_t>(size) << reason;
+	*packet << static_cast<boost::uint16_t>(size) << reason;
 	return PacketType(packet);
 }
 
@@ -257,7 +257,7 @@ PacketType CBaseNetProtocol::SendSystemMessage(uchar myPlayerNum, std::string me
 	}
 	unsigned size = 1 + 2 + 1 + message.size() + 1;
 	PackPacket* packet = new PackPacket(size, NETMSG_SYSTEMMSG);
-	*packet << static_cast<uint16_t>(size) << myPlayerNum << message;
+	*packet << static_cast<boost::uint16_t>(size) << myPlayerNum << message;
 	return PacketType(packet);
 }
 
@@ -361,7 +361,7 @@ PacketType CBaseNetProtocol::SendSdCheckrequest(int frameNum)
 	return PacketType(packet);
 }
 
-PacketType CBaseNetProtocol::SendSdCheckresponse(uchar myPlayerNum, uint64_t flop, std::vector<unsigned> checksums)
+PacketType CBaseNetProtocol::SendSdCheckresponse(uchar myPlayerNum, boost::uint64_t flop, std::vector<unsigned> checksums)
 {
 	unsigned size = 1 + 2 + 1 + 8 + checksums.size() * 4;
 	PackPacket* packet = new PackPacket(size, NETMSG_SD_CHKRESPONSE);
